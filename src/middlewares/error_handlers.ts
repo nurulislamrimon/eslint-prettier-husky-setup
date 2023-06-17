@@ -1,19 +1,26 @@
-import { ErrorRequestHandler, RequestParamHandler } from 'express'
+import { ErrorRequestHandler, RequestHandler } from 'express'
+import { errorLogger } from '../logger/logger'
 
-export const not_exist_route_error_handler: RequestParamHandler = (
+export const not_exist_route_error_handler: RequestHandler = (
   req,
-  res
+  res,
+  next
 ) => {
-  res.send({
-    status: 'failed',
-    message: 'Route not found!',
-  })
-  console.log('Route not found!')
+  try {
+    res.send({
+      status: 'failed',
+      message: 'Route not found!',
+    })
+    errorLogger.error('Route not found!')
+  } catch (error) {
+    next(error)
+  }
 }
-export const error_handler: ErrorRequestHandler = (err, req, res) => {
+export const error_handler: ErrorRequestHandler = (err, req, res, next) => {
   res.send({
     status: 'failed',
     message: err.message,
   })
-  console.log(err.message)
+  errorLogger.error(err.message)
+  next()
 }

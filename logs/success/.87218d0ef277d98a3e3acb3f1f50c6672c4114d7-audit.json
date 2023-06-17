@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\logs\\success\\.87218d0ef277d98a3e3acb3f1f50c6672c4114d7-audit.json",
+    "files": [
+        {
+            "date": 1687005373630,
+            "name": "C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\logs\\success\\success-2023-06-17-18.log",
+            "hash": "87953b6fdccd5618c81919764080c110060c68be49fa689d5d0e88d853d877da"
+        }
+    ],
+    "hashType": "sha256"
+}
