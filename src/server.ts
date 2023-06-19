@@ -8,14 +8,16 @@ import {
   // not_exist_route_error_handler,
 } from './middlewares/error_handlers/error_handlers'
 import { errorLogger } from './logger/logger'
+import { Server } from 'http'
 
-async function server() {
+async function server_main_function() {
+  let server: Server
   try {
     // error handler
     app.use(not_exist_route_error_handler)
     app.use(error_handler)
 
-    app.listen(config.port, () => {
+    server = app.listen(config.port, () => {
       console.log(
         colors.magenta(`Example app listening on port ${config.port}`)
       )
@@ -23,6 +25,17 @@ async function server() {
   } catch (error) {
     errorLogger.error('failed to connect database', error)
   }
+
+  process.on('unhandledRejection', error => {
+    if (server) {
+      server.close(() => {
+        errorLogger.error(error)
+      })
+      process.exit(1)
+    } else {
+      process.exit(1)
+    }
+  })
 }
 
-server()
+server_main_function()
