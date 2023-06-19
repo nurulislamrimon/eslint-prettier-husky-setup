@@ -1,0 +1,17 @@
+{
+  level: 'error',
+  message: 'failed to connect database not_exist_route_error_handler is not defined',
+  stack: 'ReferenceError: not_exist_route_error_handler is not defined\n' +
+    '    at C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\src\\server.ts:14:13\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\src\\server.ts:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at __awaiter (C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\src\\server.ts:4:12)\n' +
+    '    at server (C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\src\\server.ts:21:12)\n' +
+    '    at Object.<anonymous> (C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\src\\server.ts:27:1)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1226:14)\n' +
+    '    at Module._compile (C:\\Users\\nurul_islam_rimon\\Desktop\\Work\\Servers\\eslint-prittier-husky-setup\\node_modules\\source-map-support\\source-map-support.js:568:25)\n' +
+    '    at Module.m._compile (C:\\Users\\NURUL_~1\\AppData\\Local\\Temp\\ts-node-dev-hook-3582216369796458.js:69:33)',
+  label: 'Project Name!',
+  timestamp: '2023-06-19T15:20:15.380Z'
+}

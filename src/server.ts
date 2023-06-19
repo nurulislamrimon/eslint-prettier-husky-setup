@@ -4,13 +4,25 @@ import app from './app/app'
 import config from './config/config'
 import {
   error_handler,
+  not_exist_route_error_handler,
   // not_exist_route_error_handler,
-} from './middlewares/error_handlers'
+} from './middlewares/error_handlers/error_handlers'
+import { errorLogger } from './logger/logger'
 
-// error handler
-// app.use(not_exist_route_error_handler)
-app.use(error_handler)
+async function server() {
+  try {
+    // error handler
+    app.use(not_exist_route_error_handler)
+    app.use(error_handler)
 
-app.listen(config.port, () => {
-  console.log(colors.magenta(`Example app listening on port ${config.port}`))
-})
+    app.listen(config.port, () => {
+      console.log(
+        colors.magenta(`Example app listening on port ${config.port}`)
+      )
+    })
+  } catch (error) {
+    errorLogger.error('failed to connect database', error)
+  }
+}
+
+server()
