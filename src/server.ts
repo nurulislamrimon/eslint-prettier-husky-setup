@@ -10,8 +10,13 @@ import {
 import { errorLogger } from './logger/logger'
 import { Server } from 'http'
 
+process.on('uncaughtException', () => {
+  console.log('uncoughtException detected')
+  process.exit(1)
+})
+
+let server: Server
 async function server_main_function() {
-  let server: Server
   try {
     // error handler
     app.use(not_exist_route_error_handler)
@@ -39,3 +44,9 @@ async function server_main_function() {
 }
 
 server_main_function()
+
+process.on('SIGTERM', () => {
+  if (server) {
+    server.close()
+  }
+})
