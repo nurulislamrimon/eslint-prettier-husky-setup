@@ -14,7 +14,7 @@ export const getUsers: RequestHandler = (req, res, next) => {
   }
   //   get filters using pick function
   const filters = pick(req.query, ['searchTerm', 'name', 'age', 'studentId'])
-  const { searchTerm, ...searchFields } = filters
+  const { searchTerm, ...filterFields } = filters
   // combination of gloabal and specific fields
   const andConditions = []
 
@@ -28,9 +28,14 @@ export const getUsers: RequestHandler = (req, res, next) => {
       })),
     })
   }
-
   // cost {searchTerm}=filters
-
+  if (Object.keys(filterFields).length) {
+    andConditions.push({
+      $and: Object.entries(filterFields).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
   const result = andConditions
   res.send({
     status: 'success',
