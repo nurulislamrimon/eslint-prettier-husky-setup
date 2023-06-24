@@ -9,7 +9,8 @@ import {
 } from './middlewares/error_handlers/error_handlers'
 import { errorLogger } from './logger/logger'
 import { Server } from 'http'
-
+import { getUsers } from './services/user.service'
+// uncaughtException handler
 process.on('uncaughtException', () => {
   console.log('uncoughtException detected')
   process.exit(1)
@@ -18,6 +19,8 @@ process.on('uncaughtException', () => {
 let server: Server
 async function server_main_function() {
   try {
+    // routes only for filter not formatted
+    app.use('/user', getUsers)
     // error handler
     app.use(not_exist_route_error_handler)
     app.use(error_handler)
@@ -30,7 +33,7 @@ async function server_main_function() {
   } catch (error) {
     errorLogger.error('failed to connect database', error)
   }
-
+  // unhandledRejection handler
   process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
@@ -44,7 +47,7 @@ async function server_main_function() {
 }
 
 server_main_function()
-
+// SIGTERM event
 process.on('SIGTERM', () => {
   if (server) {
     server.close()
